@@ -114,9 +114,29 @@ To make sure everything is set up correctly:
    ```
    Should show Python 3.11 or higher
 
+## Installing GDD CLI Utils
+
+The project includes GDD (Google Drive Download) CLI utilities to simplify dataset management from the command line.
+
+1. **Install GDD CLI utilities:**
+
+   ```bash
+   pixi run pip install gdd-cli
+   ```
+
+   **What this does:** Installs the GDD CLI utilities in your Pixi environment.
+
+2. **Verify installation:**
+
+   ```bash
+   pixi run gdd --version
+   ```
+
+   Should show the version number of the installed GDD CLI.
+
 ## Working with the Dataset
 
-This project uses Google Drive to store and share the dataset. The repository includes two Python scripts to help you synchronize the dataset:
+This project uses Google Drive to store and share the dataset. The repository includes two Python scripts to help you synchronize the dataset, and you can also use the GDD CLI utils for streamlined operations:
 
 ### Downloading the Dataset (`gd_pull`)
 
@@ -133,6 +153,21 @@ python gd_pull.py
 - Overwrites any existing local dataset
 
 **When to use:** Run this when you first set up the project, or when you need to get updates to the dataset.
+
+### Using GDD CLI for Dataset Operations
+
+Alternatively, you can use the GDD CLI utils for more control:
+
+```bash
+pixi run gdd pull <google-drive-id>
+```
+
+**What this does:**
+- Downloads files directly from Google Drive using the GDD CLI
+- Provides faster and more reliable downloads
+- Supports resuming interrupted downloads
+
+**When to use:** Use this for more control over dataset downloads or if you prefer using the command-line interface directly.
 
 ### Uploading Dataset Changes (`gd_push`)
 
@@ -161,5 +196,6 @@ python gd_push.py
 
 - **Python requirement:** Make sure you have Python 3.11+ installed before installing Pixi
 - **Git setup:** Ensure you have Git installed and configured with SSH keys for GitHub access
+- **GDD CLI:** The GDD CLI utils provide additional command-line tools for Google Drive operations. See `pixi run gdd --help` for more information
 - **Troubleshooting:** If you encounter issues, check the [Pixi documentation](https://pixi.sh/) or create an issue in the repository
 - **Updates:** To update dependencies later, run `pixi install` again after pulling repository changes
