@@ -1,0 +1,10 @@
+[workspace]
+authors = ["Ashwin Prasanth Hariharan <ashwinprasanth06@gmail.com>"]
+channels = ["conda-forge"]
+name = "smu-env"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
