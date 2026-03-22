@@ -47,3 +47,7 @@ class DatasetLoader:
             "count": 0 if points is None else len(points),
             "path": str(img_path)
         }
+
+    def __iter__(self):
+        for idx in range(len(self)):
+            yield self[idx]
