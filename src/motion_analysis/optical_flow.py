@@ -1,13 +1,29 @@
 ﻿import cv2
+import numpy as np
+from typing import Tuple
 
-def compute_optical_flow(frame1, frame2):
-    gray1 = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
-    gray2 = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
 
+def compute_optical_flow(prev_gray: np.ndarray, curr_gray: np.ndarray) -> np.ndarray:
+    """
+    Compute optical flow between two grayscale frames using Farneback algorithm.
+    
+    Args:
+        prev_gray: Previous grayscale frame
+        curr_gray: Current grayscale frame
+    
+    Returns:
+        Optical flow array of shape (H, W, 2) with flow vectors (fx, fy)
+    """
     flow = cv2.calcOpticalFlowFarneback(
-        gray1, gray2,
+        prev_gray, curr_gray,
         None,
-        0.5, 3, 15, 3, 5, 1.2, 0
+        pyr_scale=0.5,
+        levels=3,
+        winsize=15,
+        iterations=3,
+        poly_n=5,
+        poly_sigma=1.2,
+        flags=0
     )
-
+    
     return flow
