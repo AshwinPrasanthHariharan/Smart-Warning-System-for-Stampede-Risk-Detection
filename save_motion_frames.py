@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Simple script to save motion analysis visualization frames with density heatmap overlay.
+Simple script to save motion analysis visualization frames.
 Method 1: Save frames without display windows.
 """
 
@@ -66,7 +66,7 @@ def _extract_points_recursive(obj) -> np.ndarray | None:
 
     return best
 
-print("Motion Analysis with Density Heatmap - Frame Saving")
+print("Motion Analysis Frame Saving")
 print("=" * 60)
 
 DEFAULT_DENSITY_SIGMA = 18.0
@@ -133,8 +133,8 @@ stats = process(
 # Show results
 print("\n" + "=" * 60)
 print("SAVED FRAMES LOCATION: output_frames/")
-print("Each frame contains 4 panels: density heatmap | flow arrows")
-print("                           zone overlay    | motion heatmap")
+print("Each frame contains 4 panels: frame         | flow vectors")
+print("                           grid overlay   | motion heatmap")
 print("=" * 60)
 
 # Count saved files

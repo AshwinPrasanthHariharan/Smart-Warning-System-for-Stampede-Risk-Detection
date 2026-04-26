@@ -1,0 +1,136 @@
+/* ============================================================
+   index.css — Global styles for CrowdGuard
+   Import this once in main.jsx / index.jsx
+   ============================================================ */
+
+/* Google Fonts — loaded via CSS import for Vite compatibility */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ── CSS custom properties (design tokens) ── */
+:root {
+  --bg:      #04080f;
+  --panel:   #080e1a;
+  --border:  #0f2040;
+  --border2: #1a4080;
+  --text:    #c8d8f0;
+  --muted:   #4a6080;
+  --ac:      #00aaff;
+  --ac2:     #00ffcc;
+  --warn:    #ff9900;
+  --danger:  #ff2244;
+  --safe:    #00ff88;
+  --mono:    'Share Tech Mono', monospace;
+  --disp:    'Bebas Neue', sans-serif;
+  --body:    'DM Sans', sans-serif;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 13px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border2); }
+
+/* ── Range slider reset ── */
+input[type='range'] {
+  -webkit-appearance: none;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--ac);
+}
+
+/* ── Keyframe animations ── */
+
+/* Pulsing dot used in status pills */
+@keyframes pulse {
+  0%, 100% { opacity: 1;  transform: scale(1);   }
+  50%       { opacity: .3; transform: scale(.7);  }
+}
+
+/* Critical feed card glow */
+@keyframes dangerGlow {
+  0%, 100% { box-shadow: 0 0  6px rgba(255, 34, 68, .15); }
+  50%       { box-shadow: 0 0 20px rgba(255, 34, 68, .4);  }
+}
+
+/* Danger camera row background pulse */
+@keyframes camFlash {
+  0%, 100% { background: rgba(255, 34, 68, .04); }
+  50%       { background: rgba(255, 34, 68, .10); }
+}
+
+/* Log entry slide-in */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+/* Alert banner drop-in */
+@keyframes alertIn {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+/* ── Utility classes ── */
+
+/* CRT scanline overlay — applied to root wrapper */
+.scanlines::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, .05) 2px,
+    rgba(0, 0, 0, .05) 4px
+  );
+}
+
+/* Subtle grid background */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 100, 255, .025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 100, 255, .025) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Hover state for camera list rows */
+.cam-row:hover { background: rgba(255, 255, 255, .04) !important; }
+
+/* Log animation */
+.log-entry { animation: slideIn .22s ease; }

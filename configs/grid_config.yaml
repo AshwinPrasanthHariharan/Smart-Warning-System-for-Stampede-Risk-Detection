@@ -1,1 +1,9 @@
-﻿
+﻿grid:
+	rows: 4
+	cols: 4
+	zone_prefix: Z
+
+frame:
+	width: 640
+	height: 480
+

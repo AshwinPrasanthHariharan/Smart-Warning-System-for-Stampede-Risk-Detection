@@ -1,1 +1,11 @@
-﻿
+﻿dataset:
+	name: mall
+	image_dir: datasets/mall_frames
+	annotation_dir: datasets/annotations
+	image_extension: .jpg
+
+runtime:
+	start_idx: 0
+	end_idx: null
+	skip_frames: 1
+

@@ -1,1 +1,14 @@
-﻿
+﻿risk:
+	density_safe: 1.5
+	density_critical: 7.0
+	speed_safe: 0.4
+	speed_critical: 2.5
+
+	# Weights should sum close to 1.0
+	weight_density: 0.5
+	weight_speed: 0.3
+	weight_interaction: 0.2
+
+	sri_warning: 55.0
+	sri_critical: 75.0
+

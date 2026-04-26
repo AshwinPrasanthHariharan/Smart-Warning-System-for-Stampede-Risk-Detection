@@ -241,7 +241,7 @@ def process(source: str, display: bool = True, save_frames: bool = None,
             
             # Generate visualizations (skip if not saving and not displaying)
             if save_frames or display:
-                # Create visualizations with overlaid heatmap
+                # Create visualization panels
                 heatmap_overlaid = overlay_heatmap_on_frame(curr_frame.copy(), magnitude, SPEED_MAX, alpha=0.4)
                 flow_viz = draw_flow_arrows(curr_frame.copy(), flow)
                 zone_viz = draw_zone_overlay(curr_frame.copy(), zone_speed, SPEED_MIN, SPEED_MAX)
@@ -264,9 +264,10 @@ def process(source: str, display: bool = True, save_frames: bool = None,
                     adaptive_density_sigma=adaptive_density_sigma,
                 )
                 
-                # Create 2×2 panel: density overlay | flow arrows
-                #                   zone overlay     | motion heatmap
-                top_row = np.hstack([density_overlay, flow_viz])
+                # Create 2×2 panel in requested order:
+                # top-left: frame          | top-right: flow vectors
+                # bottom-left: grid zones  | bottom-right: motion heatmap
+                top_row = np.hstack([curr_frame, flow_viz])
                 bottom_row = np.hstack([zone_viz, heatmap_overlaid])
                 panel = np.vstack([top_row, bottom_row])
                 
