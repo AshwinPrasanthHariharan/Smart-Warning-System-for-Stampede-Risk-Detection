@@ -1,49 +1,87 @@
-﻿HS202 G18 Crowd Analysis Pipeline
+# HS202 G18 -  SMART WARNING SYSTEM FOR STAMPEDE RISK DETECTION
 
-This repository contains a modular crowd analysis pipeline with:
+A modular crowd-analysis and stampede prevention platform designed to monitor dense public spaces using computer vision, motion analysis, and rule-based machine learning. The system processes crowd video data to estimate density, analyze movement, detect bottlenecks, calculate zone-level Stampede Risk Index (SRI), trigger alerts, and provide an interactive visualization dashboard.
 
-- density estimation
-- motion/speed analysis
-- risk estimation (SRI)
-- lightweight visualization helpers
+---
 
-Project Layout
+## Project Objective
 
-- `src/density_estimation`: annotation parsing, YOLO helpers, density maps
-- `src/motion_analysis`: optical flow and zone speed estimation
-- `src/risk_analysis`: SRI calculation and bottleneck detection
-- `src/visualization`: overlays, alerts, and dashboard summaries
-- `configs`: runtime defaults for dataset, grid, and risk
+The primary objective of this project is to develop an early-warning crowd safety system capable of:
 
-Quick Start
+- Monitoring crowd density in real time
+- Detecting abnormal motion and sudden slowdowns
+- Identifying bottlenecks and congestion zones
+- Computing zone-level stampede risk
+- Triggering alerts for authorities
+- Visualizing crowd conditions through heatmaps and dashboards
 
-1. Create/activate your Python environment.
-2. Install dependencies (OpenCV, NumPy, SciPy, PyYAML as needed).
-3. Run a demo motion pass:
+This system is intended for:
+- Railway stations
+- Religious gatherings
+- Festivals
+- Stadiums
+- Public events
 
-```bash
-python src/main.py
-```
+---
 
-Minimal Risk Pipeline Example
+# Core Features Implemented
 
-```python
-import numpy as np
-from src.risk_analysis import SRICalculator, detect_bottlenecks
+## 1. Crowd Density Estimation
+- Input: CCTV footage / dataset frames
+- Uses:
+  - YOLO-based person detection
+  - Annotation-based counting for labeled datasets
+  - Grid-based zoning for localized analysis
+- Outputs:
+  - Zone-wise people count
+  - Density matrices
+  - People-per-region values
 
-density = np.random.rand(4, 4) * 8.0   # people per m^2
-speed = np.random.rand(4, 4) * 3.0     # m/s
+### Deliverables:
+- `density_map[frame][zone]`
+- Grid-based density overlays
 
-calc = SRICalculator()
-sri = calc.compute_sri_map(density, speed)
-summary = calc.summarize(sri)
-hotspots = detect_bottlenecks(density, speed, sri)
+---
 
-print(summary)
-print(hotspots)
-```
+## 2. Heatmap Generation
+- Converts density values into visual heatmaps
+- Region-wise crowd intensity
+- Frame-by-frame playback supported
+- Overlay on video frames
 
-Notes
+### Deliverables:
+- Real-time density heatmaps
+- Color-coded risk visualizations
 
-- Empty placeholder modules were replaced with minimal functional code.
-- SRI is computed on a 0-100 scale with configurable weights and thresholds.
+---
+
+## 3. Crowd Speed Estimation
+- Optical Flow (Farneback Algorithm)
+- Measures:
+  - Motion magnitude
+  - Average zone speed
+  - Sudden slowdowns
+
+### Deliverables:
+- `speed_map[frame][zone]`
+- Speed trend graphs
+- Motion vector visualization
+
+---
+
+## 4. Bottleneck Detection
+- Identifies:
+  - High density
+  - Low movement speed
+- Detects potential congestion zones
+
+### Deliverables:
+- Bottleneck zone highlights
+- Congestion maps
+
+---
+
+## 5. Stampede Risk Index (SRI)
+- Rule-based configurable model:
+```math
+SRI = wd(Density) + ws(Speed Drop) + wi(Interaction)
