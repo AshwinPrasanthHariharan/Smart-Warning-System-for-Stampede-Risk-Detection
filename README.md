@@ -1,4 +1,4 @@
-# HS202 G18 -  SMART WARNING SYSTEM FOR STAMPEDE RISK DETECTION
+# SMART WARNING SYSTEM FOR STAMPEDE RISK DETECTION
 
 A modular crowd-analysis and stampede prevention platform designed to monitor dense public spaces using computer vision, motion analysis, and rule-based machine learning. The system processes crowd video data to estimate density, analyze movement, detect bottlenecks, calculate zone-level Stampede Risk Index (SRI), trigger alerts, and provide an interactive visualization dashboard.
 
